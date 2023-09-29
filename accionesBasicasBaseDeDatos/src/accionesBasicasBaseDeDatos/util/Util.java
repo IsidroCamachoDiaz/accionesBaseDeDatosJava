@@ -1,6 +1,8 @@
 package accionesBasicasBaseDeDatos.util;
 
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 ///Esta clase la uso como herramientas durante varios procesos y la pongo static
 public class Util {
@@ -21,9 +23,13 @@ public class Util {
 			if(num<min||num>max) {
 				System.out.println("Error: No puso un numero entre los valores pedidos");
 			}
+		}catch(NoSuchElementException ns) {
+			System.out.println("Error: No puso un valor que no sea un numero");
+			break;
 		}catch(Exception e) {
 			System.out.println("Error: "+e.getMessage());
 			ok=false;
+			break;
 		}
 		}while(!ok||num<min||num>max);
 		return num;

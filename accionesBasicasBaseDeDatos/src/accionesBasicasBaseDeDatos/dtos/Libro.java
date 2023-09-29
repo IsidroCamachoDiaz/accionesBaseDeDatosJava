@@ -1,12 +1,15 @@
 package accionesBasicasBaseDeDatos.dtos;
-
+/**
+ * Entidad libro que es objeto que creamos con los datos que tenemos en la base de datos
+ * */
 public class Libro {
+	//Atributos
 	long idLibro;
 	String titulo;
 	String autor;
 	String isbn;
 	int edicion;
-		
+	//Constructores
 	public Libro(long idLibro, String titulo, String autor, String isbn, int edicion) {
 		super();
 		this.idLibro = idLibro;
@@ -15,7 +18,7 @@ public class Libro {
 		this.isbn = isbn;
 		this.edicion = edicion;
 	}
-	
+	//Geters y seters
 	public String getTitulo() {
 		return titulo;
 	}
@@ -43,7 +46,7 @@ public class Libro {
 	public long getIdLibro() {
 		return idLibro;
 	}
-
+	//Metodos
 	@Override
 	public String toString() {
 		return "Libro [idLibro=" + idLibro + ", titulo=" + titulo + ", autor=" + autor + ", isbn=" + isbn + ", edicion="
