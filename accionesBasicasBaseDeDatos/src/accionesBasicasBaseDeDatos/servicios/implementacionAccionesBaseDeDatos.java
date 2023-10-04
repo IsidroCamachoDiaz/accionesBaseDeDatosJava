@@ -79,19 +79,22 @@ public class implementacionAccionesBaseDeDatos implements interfazAccionesBaseDe
 	@Override
 	public void insertarDatos(List<Libro> libros, Connection conexion) {
 		//Ponemos a null el stament
-		Statement st = null;
+		PreparedStatement st = null;
 		//Esta variable sirve por si hay algun problema dice los libros que se han insertado
 		int e=0;
 		try {
 			//Se relaciona la base de datos
-		    st = conexion.createStatement();
 		    //Se hace un bucle para insertar todos los libroos
 		    for(int i=0;i<libros.size();i++) {
 		    	//Se crea la query
-		    	String sql = "INSERT INTO gbp_almacen.gbp_alm_cat_libros (titulo,autor,isbn,edicion) "
-		    + "VALUES ('"+libros.get(i).getTitulo()+"','"+libros.get(i).getAutor()+"', '"+libros.get(i).getIsbn()+"', '"+libros.get(i).getEdicion()+"');";
+		    	String query2="INSERT INTO gbp_almacen.gbp_alm_cat_libros (titulo,autor,isbn,edicion) VALUES (?,?,?,?)";
+		    	st = conexion.prepareStatement(query2);
+		    	st.setString(1, libros.get(i).getTitulo());
+		    	st.setString(2, libros.get(i).getAutor());
+		    	st.setString(3, libros.get(i).getIsbn());;
+		    	st.setInt(4, libros.get(i).getEdicion());
 		         //Se ejecuta la query
-		    	st.executeUpdate(sql);
+		    	st.executeUpdate();
 		    	//Se iguala la variable
 		          e=i;
 		    }
@@ -125,7 +128,7 @@ public class implementacionAccionesBaseDeDatos implements interfazAccionesBaseDe
 		    st.close();
 		    //Excepciones
 		}catch(Exception ed) {
-			System.out.println("no se insertar los datos en la implementcion"+ed.getMessage());	
+			System.out.println("no se ha podido insertar los datos en la implementcion"+ed.getMessage());	
 		}
 
 	}
