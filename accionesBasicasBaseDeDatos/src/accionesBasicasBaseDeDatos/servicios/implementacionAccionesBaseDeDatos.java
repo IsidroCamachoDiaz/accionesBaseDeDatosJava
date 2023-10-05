@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLTimeoutException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class implementacionAccionesBaseDeDatos implements interfazAccionesBaseDe
 	    if(!esValidad)
 	    	BaseDatos=null;
 	    //Excepciones
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			System.out.println("Se produjo un fallo en la conexion de datos en la implementacion"+e.getMessage());
 		}
 		//Devuelve la co nexion
@@ -59,8 +60,6 @@ public class implementacionAccionesBaseDeDatos implements interfazAccionesBaseDe
 		    //Excepciones
 		}catch(SQLException eq) {
 			System.out.println("Se produjo un fallo en la query en la implementacion de accion de base de datos "+eq.getMessage());
-		}catch(Exception e) {
-			System.out.println("Se produjo un fallo en leer datos en la implementacion"+e.getMessage());
 		}
 		return libros;
 	}
@@ -101,7 +100,7 @@ public class implementacionAccionesBaseDeDatos implements interfazAccionesBaseDe
 		    //Se cierra la conexion
 		    st.close();
 		    //Excepciones
-		}catch(Exception ed) {
+		}catch(SQLException ed) {
 			System.out.println("no se insertar los datos en la implementcion"+ed.getMessage()+"Se ha insertado hasta "+e);	
 		}
 
@@ -127,7 +126,7 @@ public class implementacionAccionesBaseDeDatos implements interfazAccionesBaseDe
 		    //Se cierra la consulta
 		    st.close();
 		    //Excepciones
-		}catch(Exception ed) {
+		}catch(SQLException ed) {
 			System.out.println("no se ha podido insertar los datos en la implementcion"+ed.getMessage());	
 		}
 
@@ -147,9 +146,9 @@ public class implementacionAccionesBaseDeDatos implements interfazAccionesBaseDe
 		    //Se cierra la consulta
 		    st.close();
 		    //Excepciones
-		}catch(Exception ed) {
+		}catch(SQLException ed) {
 			System.out.println("no se insertar los datos en la implementcion"+ed.getMessage());	
-		}	
+		}
 	}
 	//Este metodo se usa para coger los datos de la base de datos
 	private String[] pasaParametros(String ruta) {
