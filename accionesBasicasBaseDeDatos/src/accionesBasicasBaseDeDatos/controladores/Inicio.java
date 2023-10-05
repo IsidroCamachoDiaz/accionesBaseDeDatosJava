@@ -16,6 +16,7 @@ public class Inicio {
 				Scanner leer = new Scanner (System.in);
 				int opcion=0;
 				interfazAccionesPrincipal inter = new implementacionAccionesPrincipales();
+				try {
 				//Entra en el bucle 
 				do {
 					//Muestra el menu
@@ -41,6 +42,9 @@ public class Inicio {
 				}while(opcion!=0);
 				//Cierra el scanner
 				leer.close();
+				}catch(Exception e) {
+					System.out.println("Error: "+e.getMessage());
+				}
 	}
 
 }
